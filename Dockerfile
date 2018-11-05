@@ -1,4 +1,4 @@
-FROM       ubuntu:16.04
+FROM ubuntu:16.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 
@@ -14,6 +14,11 @@ RUN mkdir /root/.ssh
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+RUN useradd -d /home/ubuntu -ms /bin/bash -g root -G sudo -p ubuntu ubuntu
+USER ubuntu
+WORKDIR /home/ubuntu
 
 EXPOSE 22
 
