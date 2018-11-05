@@ -8,10 +8,12 @@ RUN mkdir /var/run/sshd
 
 
 RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's/^#?PasswordAuthentication\s+.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/^#?PubKeyAuthentication\s+.*/PubKeyAuthentication yes/' /etc/ssh/sshd_config
-#RUN sed -ri 's/^#?AuthorizedKeysFile\s+.*/AuthorizedKeysFile .ssh/authorized_keys/' /etc/ssh/sshd_config
+RUN sed -ri 's/^#?AuthorizedKeysFile\s+.*/AuthorizedKeysFile .ssh/authorized_keys/' /etc/ssh/sshd_config
+RUN service ssh restart
 
 RUN mkdir /root/.ssh
 RUN ssh-keygen -A
@@ -26,5 +28,5 @@ RUN useradd -ms /bin/bash newUser
 RUN echo 'newUser:newUser' |chpasswd
 
 EXPOSE 22
-
+RUN cat /etc/ssh/sshd_config
 CMD    ["/usr/sbin/sshd", "-D"]
