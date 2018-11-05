@@ -11,7 +11,7 @@ RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_confi
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's/^#?PasswordAuthentication\s+.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/^#?PubKeyAuthentication\s+.*/PubKeyAuthentication yes/' /etc/ssh/sshd_config
-RUN sed -ri 's/^#?AuthorizedKeysFile\s+.*/AuthorizedKeysFile .ssh/authorized_keys/' /etc/ssh/sshd_config
+#RUN sed -ri 's/^#?AuthorizedKeysFile\s+.*/AuthorizedKeysFile .ssh/authorized_keys/' /etc/ssh/sshd_config
 
 RUN mkdir /root/.ssh
 RUN ssh-keygen -A
